@@ -9,23 +9,38 @@ class Board extends React.Component {
     this.state = {
       squares: [null, null, null, null, null, null, null, null, null],
       player_1: "X",
-      player_2: "X"
-      dropdownOpen: false
+      player_2: "O",
+      dropdownOpen: false,
+      selectCount: 0
 
     };
   }
 
+  changeToken(event){
+    console.log(event.target.innerText);
+    let playerSymbol = event.target.innerText
+    let { player_1, player_2 } = this.state
+    player_1
+
+        //   player_1 = token1;
+        //   player_2 = token2;
+        // let player2 = player_2
+        // let player1 = player_1
+        //   this.setState({ player_1: player1, player_2: player2})
+      }
 
 
-  handleClick(i) {
-  let { squares, player } = this.state
+  handleClick(e) {
+    let { squares, player_1, player_2 } = this.state
+    player_1 = e.target.id
+    console.log(player_1);
 
-    if(squares[i] === null){
-      squares[i] = player
-    }
-  let newPlayer = player === 'X' ? 'O' : 'X'
+    // if(squares[i] === null){
+    //   squares[i] = player1
+    // }
+  let newPlayer = player_1 === player_1 ? player_2 : player_1
 
-    this.setState({squares: squares, player: newPlayer})
+    this.setState({squares: squares, player_1: player_1, player_2: player_2})
     this.checkWinner()
 }
 toggle() {
@@ -42,7 +57,11 @@ checkWinner(){
 
   for( let i = 0; i < winnerArr.length;i++){
   let [a,b,c] = winnerArr[i]
-  if(squares[a] && squares[a] == squares[b] && squares[a] == squares[c]){
+
+
+  if(squares[a] && squares[a] === squares[b] && squares[a] === squares[c]){
+
+
 alert("WEEENER")
 this.reset()
   }
@@ -52,8 +71,7 @@ this.reset()
 reset(){
   this.setState({
     squares: [null, null, null, null, null, null, null, null, null],
-    player_1: "X",
-    player_2: "O",
+    player: 'X'
   })
 }
 
@@ -69,29 +87,32 @@ reset(){
 
 
 
-      <div class="grid-container">
-          <div class="grid-item">{this.renderSquare(0)}</div>
-          <div class="grid-item">{this.renderSquare(1)}</div>
-          <div class="grid-item">{this.renderSquare(2)}</div>
-          <div class="grid-item">{this.renderSquare(3)}</div>
-          <div class="grid-item">{this.renderSquare(4)}</div>
-          <div class="grid-item">{this.renderSquare(5)}</div>
-          <div class="grid-item">{this.renderSquare(6)}</div>
-          <div class="grid-item">{this.renderSquare(7)}</div>
-          <div class="grid-item">{this.renderSquare(8)}</div>
+      <div className="grid-container">
+          <div className="grid-item">{this.renderSquare(0)}</div>
+          <div className="grid-item">{this.renderSquare(1)}</div>
+          <div className="grid-item">{this.renderSquare(2)}</div>
+          <div className="grid-item">{this.renderSquare(3)}</div>
+          <div className="grid-item">{this.renderSquare(4)}</div>
+          <div className="grid-item">{this.renderSquare(5)}</div>
+          <div className="grid-item">{this.renderSquare(6)}</div>
+          <div className="grid-item">{this.renderSquare(7)}</div>
+          <div className="grid-item">{this.renderSquare(8)}</div>
 
       <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
         <DropdownToggle caret>
           Dropdown
         </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem>{this.state.player_1}</DropdownItem>
-          <DropdownItem>Player 2 State</DropdownItem>
-          <DropdownItem>Player 3 State</DropdownItem>
+          <DropdownItem onClick={this.changeToken.bind(this)} id='x'>X</DropdownItem>
+          <DropdownItem onClick={this.changeToken.bind(this)}>O</DropdownItem>
+          <DropdownItem onClick={this.changeToken.bind(this)}>test</DropdownItem>
         </DropdownMenu>
       </Dropdown>
         </div>
     );
+  }
+  componentDidMount(){
+
   }
 }
 
