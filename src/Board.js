@@ -9,7 +9,7 @@ class Board extends React.Component {
     this.state = {
       squares: [null, null, null, null, null, null, null, null, null],
       player_1: "X",
-      player_2: "O",
+      player_2: "X"
       dropdownOpen: false
 
     };
